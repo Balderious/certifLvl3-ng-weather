@@ -1,3 +1,10 @@
-<button class="btn btn-primary" (click)="triggerAction(value)" >
+<button
+        [ngClass]="{
+            'btn': true,
+            'btn-primary': currentStateTemplate === initialStateTemplate,
+            'btn-secondary': currentStateTemplate === workingStateTemplate,
+            'btn-success': currentStateTemplate === doneStateTemplate
+        }" class="btn btn-primary"
+        (click)="triggerAction()">
     <ng-container *ngTemplateOutlet="currentStateTemplate"></ng-container>
 </button>

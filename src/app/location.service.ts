@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {WeatherService} from "./weather.service";
+import {Observable, pipe, Subscriber, Subscription, timer} from 'rxjs';
 
 export const LOCATIONS : string = "locations";
 
@@ -7,8 +8,22 @@ export const LOCATIONS : string = "locations";
 export class LocationService {
 
   locations : string[] = [];
+  private refreshTimer: Subscription;
 
-  constructor(private weatherService : WeatherService) {
+  constructor(private weatherService : WeatherService) {}
+
+  // Start auto refresh of location's current conditions
+  startAutoRefreshLocationsCurrentConditions() {
+    this.refreshTimer = timer(1, 20000).subscribe(
+        pipe(() => {
+          this.loadLocationsCurrentConditions();
+          console.log('updated ! = ', this.locations);
+        })
+    )
+  }
+
+  // Load current conditions of all asked locations
+  loadLocationsCurrentConditions() {
     let locString = localStorage.getItem(LOCATIONS);
     if (locString)
       this.locations = JSON.parse(locString);
@@ -29,5 +44,9 @@ export class LocationService {
       localStorage.setItem(LOCATIONS, JSON.stringify(this.locations));
       this.weatherService.removeCurrentConditions(zipcode);
     }
+  }
+
+  stopAutoRefreshLocationsCurrentConditions() {
+    this.refreshTimer.unsubscribe();
   }
 }

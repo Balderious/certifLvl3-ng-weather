@@ -1,4 +1,4 @@
-import {Component, OnInit, TemplateRef} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, TemplateRef} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Input } from '@angular/core';
 import {timer} from 'rxjs';
@@ -11,13 +11,16 @@ import {timer} from 'rxjs';
   styleUrls: ['./state-button.component.css']
 })
 export class StateButtonComponent implements OnInit {
+  // 3 different states of component with html content customizable.
   @Input() initialStateTemplate: TemplateRef<any>;
   @Input() workingStateTemplate: TemplateRef<any>;
   @Input() doneStateTemplate: TemplateRef<any>;
+  // Notify the parent the button has been clicked.
+  @Output() actionTriggered = new EventEmitter<string>();
 
   private currentStateTemplate: TemplateRef<any>;
-  private action$ = timer(2000);
-  private resetButton$ = timer(1000);
+  private actionTimer$ = timer(500);
+  private resetButtonTimer$ = timer(500);
 
 
   constructor() {}
@@ -26,12 +29,15 @@ export class StateButtonComponent implements OnInit {
     this.currentStateTemplate = this.initialStateTemplate;
   }
 
-  triggerAction(value: any) {
+  triggerAction() {
     this.currentStateTemplate = this.workingStateTemplate;
-    this.action$.subscribe(
+    this.actionTriggered.emit();
+
+    this.actionTimer$.subscribe(
         () => {
           this.currentStateTemplate = this.doneStateTemplate;
-          this.resetButton$.subscribe(
+          // Reset the button state.
+          this.resetButtonTimer$.subscribe(
               () => this.currentStateTemplate = this.initialStateTemplate
           )
         }
