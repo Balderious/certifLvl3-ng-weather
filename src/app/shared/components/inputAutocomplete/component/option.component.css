@@ -1,0 +1,14 @@
+:host /deep/ .hightlight-text-bold {
+    font-weight: bold;
+}
+
+:host /deep/ .option {
+    background: white;
+    padding: 1rem;
+    width: 200px;
+}
+
+:host /deep/ .option:hover {
+    background: lightgrey;
+    cursor: pointer;
+}

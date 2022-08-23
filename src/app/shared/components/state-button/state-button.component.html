@@ -8,3 +8,16 @@
         (click)="triggerAction()">
     <ng-container *ngTemplateOutlet="currentStateTemplate"></ng-container>
 </button>
+
+<!-- Default templates-->
+<ng-template #save>
+    Save
+</ng-template>
+
+<ng-template #loading>
+    <img src="https://github.com/alcfeoh/ng-advanced-workshop/raw/master/src/assets/loader.gif" style="width: 20px">
+</ng-template>
+
+<ng-template #saved>
+    Saved!
+</ng-template>

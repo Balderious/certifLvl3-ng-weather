@@ -1,0 +1,16 @@
+:host /deep/ .autocomplete-wrapper {
+    position: relative;
+    margin-bottom: 10px;
+}
+
+:host /deep/ .autocomplete-wrapper .form-control {
+    width: 200px;
+}
+
+:host /deep/ .options-list {
+    border: 1px solid lightgrey;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    position: absolute;
+    top: 34px;
+    left: 0;
+}

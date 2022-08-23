@@ -12,17 +12,16 @@ export class LocationService {
 
   constructor(private weatherService : WeatherService) {}
 
-  // Start auto refresh of location's current conditions
-  startAutoRefreshLocationsCurrentConditions() {
-    this.refreshTimer = timer(1, 20000).subscribe(
+  // Start auto refresh of locations current conditions
+  startAutoRefreshLocationsCurrentConditions(delay: number) {
+    this.refreshTimer = timer(1, delay).subscribe(
         pipe(() => {
           this.loadLocationsCurrentConditions();
-          console.log('updated ! = ', this.locations);
         })
     )
   }
 
-  // Load current conditions of all asked locations
+  // Load current conditions
   loadLocationsCurrentConditions() {
     let locString = localStorage.getItem(LOCATIONS);
     if (locString)
@@ -46,6 +45,7 @@ export class LocationService {
     }
   }
 
+  // Stop auto refresh system
   stopAutoRefreshLocationsCurrentConditions() {
     this.refreshTimer.unsubscribe();
   }

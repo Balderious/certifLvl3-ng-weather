@@ -1,3 +1,4 @@
-:host{
-
+:host /deep/ .btn-secondary {
+    background-color: #74acfc;
+    color: white;
 }

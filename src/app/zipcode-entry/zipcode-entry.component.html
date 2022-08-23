@@ -1,16 +1,23 @@
 <div class="well">
-  <h2>Enter a zipcode:</h2>
+  <h2>Select country or enter a zipcode:</h2>
+
+  <app-input-autocomplete
+          [optionsData]="countriesDataMock"
+          [placeholderInput]="'Select country'"
+          (optionSelectedDataEvent)="getCountryData($event)"
+  ></app-input-autocomplete>
   <input type="text" #zipcode placeholder="Zipcode" class="form-control">
+
   <br>
   <app-state-button
     [initialStateTemplate]="load"
     [workingStateTemplate]="loading"
     [doneStateTemplate]="loaded"
-    (actionTriggered)="addLocation($event)"
+    (actionTriggered)="addLocation()"
   ></app-state-button>
 </div>
 
-
+<!-- Templates to customize state-button-->
 <ng-template #load>
   Add location
 </ng-template>

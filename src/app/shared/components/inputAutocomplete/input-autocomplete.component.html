@@ -1,0 +1,18 @@
+<div class="autocomplete-wrapper">
+    <input type="text" class="form-control" [placeholder]="placeholderInput"
+           [(ngModel)]="inputSearchValue"
+           (focus)="onFocus()"
+           (focusout)="onFocusOut()"
+    >
+
+    <ng-container *ngIf="isFocus">
+        <div class="options-list">
+            <app-option *ngFor="let option of optionsData | dataFilter: inputSearchValue"
+                        [optionData]="option"
+                        [searchedText]="inputSearchValue"
+                        (optionSelectedEvent)="getOptionDataSelected($event)"
+            >
+            </app-option>
+        </div>
+    </ng-container>
+</div>

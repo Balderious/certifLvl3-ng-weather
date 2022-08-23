@@ -15,6 +15,10 @@ import {HttpClientModule} from "@angular/common/http";
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import {StateButtonComponent} from './shared/components/state-button/state-button.component';
+import { InputAutocompleteComponent } from './shared/components/inputAutocomplete/input-autocomplete.component';
+import { OptionComponent } from './shared/components/inputAutocomplete/component/option.component';
+import {DataFilterPipe} from './shared/pipes/dataFilter.pipe';
+import {HightlightTextDirective} from './shared/directives/hightlightText.directive';
 
 @NgModule({
   declarations: [
@@ -23,6 +27,11 @@ import {StateButtonComponent} from './shared/components/state-button/state-butto
     ForecastsListComponent,
     CurrentConditionsComponent,
     MainPageComponent,
+    StateButtonComponent,
+    InputAutocompleteComponent,
+    OptionComponent,
+    DataFilterPipe,
+    HightlightTextDirective,
   ],
   imports: [
     BrowserModule,
@@ -31,7 +40,6 @@ import {StateButtonComponent} from './shared/components/state-button/state-butto
     RouterModule,
     routing,
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
-    StateButtonComponent
   ],
   providers: [LocationService, WeatherService],
   bootstrap: [AppComponent]
